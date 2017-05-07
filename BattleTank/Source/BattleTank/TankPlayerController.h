@@ -21,5 +21,15 @@ public:
 
 	void Tick(float DeltaSeconds) override;
 
+private:
+
 	void AimTowardsCrosshair();
+
+	bool GetSightRayHitLocation(FVector& hitLocation) const;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = .5f;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = .3333f;
 };
