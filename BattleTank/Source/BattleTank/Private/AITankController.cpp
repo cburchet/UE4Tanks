@@ -9,12 +9,8 @@
 void AAITankController::BeginPlay()
 {
 	Super::BeginPlay();
-	ATank* aiTank = GetControlledTank();
-	ATank* playerTank = GetPlayerTank();
-	if (aiTank && playerTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("AI possessed tank: %s targeting: %s"), *aiTank->GetName(), *playerTank->GetName());
-	}
+	aiTank = GetControlledTank();
+	playerTank = GetPlayerTank();
 }
 
 ATank* AAITankController::GetControlledTank() const
@@ -25,4 +21,16 @@ ATank* AAITankController::GetControlledTank() const
 ATank* AAITankController::GetPlayerTank() const
 {
 	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+}
+
+void AAITankController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (playerTank)
+	{
+		if (aiTank)
+		{
+			aiTank->AimAt(playerTank->GetActorLocation());
+		}
+	}
 }

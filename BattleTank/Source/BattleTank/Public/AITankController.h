@@ -21,4 +21,11 @@ private:
 
 	ATank* GetPlayerTank() const;
 
+	void Tick(float DeltaSeconds) override;
+
+	UPROPERTY()
+	ATank* playerTank;
+
+	UPROPERTY()
+	ATank* aiTank;
 };
