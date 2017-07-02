@@ -37,6 +37,12 @@ void UTankAimingComponent::AimAt(FVector location, float LaunchSpeed)
 	{
 		AimDirection = LaunchVelocity.GetSafeNormal();
 		MoveBarrel(AimDirection);
+		float time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: Elevate called at speed %f"), time, LaunchSpeed);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No solution found"));
 	}
 }
 
