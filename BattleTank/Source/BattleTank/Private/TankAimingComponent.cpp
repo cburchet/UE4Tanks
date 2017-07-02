@@ -33,12 +33,12 @@ void UTankAimingComponent::AimAt(FVector location, float LaunchSpeed)
 	FVector startLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	FVector AimDirection;
 	if (UGameplayStatics::SuggestProjectileVelocity(this, LaunchVelocity, startLocation, location, LaunchSpeed, 
-		ESuggestProjVelocityTraceOption::DoNotTrace))
+		false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
 		AimDirection = LaunchVelocity.GetSafeNormal();
 		MoveBarrel(AimDirection);
 		float time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f: Elevate called at speed %f"), time, LaunchSpeed);
+		UE_LOG(LogTemp, Warning, TEXT("%f: Elevate called at speed %s"), time, *AimDirection.ToString());
 	}
 	else
 	{
@@ -53,7 +53,6 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	FRotator AimRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimRotator - BarrelRotator;
 	//rotate barrel
-	UE_LOG(LogTemp, Warning, TEXT("starting to elevate"));
 	Barrel->Elevate(5.0f);
 }
 
