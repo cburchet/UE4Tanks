@@ -15,6 +15,15 @@ class BATTLETANK_API ATank : public APawn
 public:
 	void AimAt(FVector hitLocation);
 
+	UFUNCTION(BlueprintCallable, Category = firing)
+		void Fire();
+
+	UFUNCTION(BlueprintCallable, Category = setup)
+	void SetTankReferences(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
+
 	UFUNCTION(BlueprintCallable, Category = setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
@@ -32,5 +41,5 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
 	UPROPERTY(EditAnywhere, category = firing)
-	float LaunchSpeed = 100000.0f;
+	float LaunchSpeed = 4000.0f; 
 };
