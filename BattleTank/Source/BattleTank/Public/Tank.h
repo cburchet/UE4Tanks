@@ -18,18 +18,11 @@ class BATTLETANK_API ATank : public APawn
 public:
 	void AimAt(FVector hitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = firing)
+	UFUNCTION(BlueprintCallable, Category = "firing")
 		void Fire();
 
-	UFUNCTION(BlueprintCallable, Category = setup)
-	void SetTankReferences(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
+	UFUNCTION(BlueprintCallable, Category = "setup")
+		void SetAiming(UTankAimingComponent* aimingComponent);
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
@@ -49,8 +42,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	UTankBarrel* barrel = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float reloadTimeSeconds = 3.0f;

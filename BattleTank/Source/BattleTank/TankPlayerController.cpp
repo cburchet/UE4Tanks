@@ -14,7 +14,6 @@ ATank* ATankPlayerController::GetControlledTank() const
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	ATank* player = GetControlledTank();
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
