@@ -10,28 +10,20 @@
 void AAITankController::BeginPlay()
 {
 	Super::BeginPlay();
-	aiTank = GetControlledTank();
-	playerTank = GetPlayerTank();
-}
-
-ATank* AAITankController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-ATank* AAITankController::GetPlayerTank() const
-{
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
 void AAITankController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	playerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	if (playerTank)
 	{
+		aiTank = Cast<ATank>(GetPawn());
+		MoveToActor(playerTank, AcceptanceRadius);	//assume check radius is in cm
 		if (aiTank)
 		{
 			aiTank->AimAt(playerTank->GetActorLocation());
 		}
+		aiTank->Fire();
 	}
 }

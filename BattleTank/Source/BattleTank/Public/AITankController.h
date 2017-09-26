@@ -18,10 +18,6 @@ class BATTLETANK_API AAITankController : public AAIController
 private:
 	void BeginPlay() override;
 
-	ATank* GetControlledTank() const;
-
-	ATank* GetPlayerTank() const;
-
 	void Tick(float DeltaSeconds) override;
 
 	UPROPERTY()
@@ -29,4 +25,7 @@ private:
 
 	UPROPERTY()
 	ATank* aiTank;
+
+	UPROPERTY()
+	float AcceptanceRadius = 3000.0f;	//30m
 };
