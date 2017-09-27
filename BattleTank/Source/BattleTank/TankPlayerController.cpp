@@ -2,6 +2,7 @@
 
 #include "BattleTank.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
 
@@ -14,6 +15,15 @@ ATank* ATankPlayerController::GetControlledTank() const
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+	UTankAimingComponent* TankAimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (TankAimingComponent)
+	{
+		FoundAimingComponent(TankAimingComponent);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No aiming component"))
+	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -24,7 +34,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetControlledTank())
+	if (!ensure(GetControlledTank()))
 	{
 		return;
 	}

@@ -14,8 +14,6 @@ UTankAimingComponent::UTankAimingComponent()
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
-	
 }
 
 
@@ -26,7 +24,7 @@ UTankBarrel* UTankAimingComponent::GetBarrel() const
 
 void UTankAimingComponent::AimAt(FVector location, float LaunchSpeed)
 {
-	if (!Barrel || !Turret)
+	if (!ensure(Barrel && Turret))
 	{
 		return;
 	}
