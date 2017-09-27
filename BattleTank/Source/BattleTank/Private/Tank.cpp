@@ -17,6 +17,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); 
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 // Called to bind functionality to input
@@ -47,9 +48,4 @@ void ATank::Fire()
 		TankAimingComponent->GetBarrel()->GetSocketRotation(FName("Projectile")));
 	projectile->LaunchProjectile(LaunchSpeed);
 	lastFireTime = FPlatformTime::Seconds();
-}
-
-void ATank::SetAiming(UTankAimingComponent* aimingComponent)
-{
-	TankAimingComponent = aimingComponent;
 }
