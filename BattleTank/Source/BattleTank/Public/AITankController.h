@@ -9,6 +9,7 @@
  * 
  */
 
+class UTankAimingComponent;
 class ATank;
 UCLASS()
 class BATTLETANK_API AAITankController : public AAIController
@@ -23,9 +24,9 @@ private:
 	UPROPERTY()
 	ATank* playerTank;
 
-	UPROPERTY()
-	ATank* aiTank;
+	UTankAimingComponent* TankAimingComponent;
 
-	UPROPERTY()
-	float AcceptanceRadius = 3000.0f;	//30m
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AcceptanceRadius = 8000.0f;	//80m
 };

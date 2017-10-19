@@ -1,9 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
-#include "TankBarrel.h"
-#include "Projectile.h"
-#include "TankAimingComponent.h"
 #include "Tank.h"
 
 // Sets default values
@@ -17,7 +14,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); 
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 // Called to bind functionality to input
@@ -27,25 +23,3 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 }
 
-void ATank::AimAt(FVector hitLocation)
-{
-	if (!ensure(TankAimingComponent))
-	{
-		return;
-	}
-	TankAimingComponent->AimAt(hitLocation, LaunchSpeed);
-}
-
-void ATank::Fire()
-{
-	bool isReloaded = (FPlatformTime::Seconds() - lastFireTime) > reloadTimeSeconds;
-	if (!isReloaded)
-	{
-		return;
-	}
-	AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint,
-		TankAimingComponent->GetBarrel()->GetSocketLocation(FName("Projectile")),
-		TankAimingComponent->GetBarrel()->GetSocketRotation(FName("Projectile")));
-	projectile->LaunchProjectile(LaunchSpeed);
-	lastFireTime = FPlatformTime::Seconds();
-}
