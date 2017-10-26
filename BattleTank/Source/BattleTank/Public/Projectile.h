@@ -25,6 +25,12 @@ protected:
 	virtual void BeginPlay() override;
 private:
 
+	void TimerExpired();
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+		FVector NormalImpulse, const FHitResult& Hit);
+
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 	
 	UPROPERTY(VisibleAnywhere, Category = "setup")
@@ -39,7 +45,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "setup")
 	URadialForceComponent* ExplosionForce = nullptr;
 
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
-			FVector NormalImpulse, const FHitResult& Hit);
+	UPROPERTY(EditDefaultsOnly, Category = "setup")
+	float DestroyDelay = .5f;
+
+	FTimerHandle ProjectileDestroyHandle;
+
 };
