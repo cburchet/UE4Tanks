@@ -3,6 +3,7 @@
 #include "BattleTank.h"
 #include "Tank.h"
 
+
 // Sets default values
 ATank::ATank()
 {
@@ -23,3 +24,17 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 }
 
+float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const &DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	//Super::TakeDamage(float DamageAmount, struct FDamageEvent const &DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp<int32>(DamagePoints, 0, CurrentHealth);
+
+	if (CurrentHealth <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Tank Dead"));
+	}
+
+	CurrentHealth -= DamageToApply;
+	return DamageToApply;
+}

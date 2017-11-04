@@ -48,6 +48,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "setup")
 	float DestroyDelay = .5f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "setup")
+	float ProjectileDamage = 20.0f;
+
 	FTimerHandle ProjectileDestroyHandle;
 
 };

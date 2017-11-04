@@ -12,6 +12,10 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	
+	UFUNCTION()
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const &DamageEvent, class AController* EventInstigator,
+		AActor* DamageCauser) override;
+
 protected:
 
 private:
@@ -24,4 +28,9 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "setup")
+	int32 StartingHealth = 100.0f;
+
+	UPROPERTY(VisibleAnywhere, Category = "health")
+	int32 CurrentHealth = StartingHealth;
 };
