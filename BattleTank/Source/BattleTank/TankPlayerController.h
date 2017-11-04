@@ -25,6 +25,9 @@ public:
 
 	void Tick(float DeltaSeconds) override;
 
+	UFUNCTION()
+	void OnTankDeath();
+
 private:
 	UTankAimingComponent* TankAimingComponent;
 
@@ -35,6 +38,8 @@ private:
 	bool GetLookDirection(FVector2D screenLocation, FVector& lookDirection) const;
 
 	bool GetLookVectorHitLocation(FVector& hitLocation, FVector lookDirection) const;
+
+	virtual void SetPawn(APawn* InPawn) override;
 
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = .5f;

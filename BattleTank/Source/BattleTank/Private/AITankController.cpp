@@ -6,8 +6,6 @@
 #include "AITankController.h"
 
 
-
-
 void AAITankController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -36,5 +34,24 @@ void AAITankController::Tick(float DeltaTime)
 		{
 			TankAimingComponent->Fire();
 		}
+	}
+}
+
+void AAITankController::OnTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("AI recieved death notice"));
+}
+
+void AAITankController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		ATank* PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank))
+		{
+			return;
+		}
+		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &AAITankController::OnTankDeath);
 	}
 }
