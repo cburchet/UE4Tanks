@@ -39,7 +39,11 @@ void AAITankController::Tick(float DeltaTime)
 
 void AAITankController::OnTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("AI recieved death notice"));
+	if (!GetPawn())
+	{
+		return;
+	}
+	GetPawn()->DetachFromControllerPendingDestroy();
 }
 
 void AAITankController::SetPawn(APawn* InPawn)

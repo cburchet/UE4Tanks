@@ -25,7 +25,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::OnTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Player recieved death notice"));
+	StartSpectatingOnly();
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
